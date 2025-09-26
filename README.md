@@ -20,7 +20,7 @@ A aplicação gerencia quartos de hotel, movendo-os entre listas de "Disponívei
 ## 📸 Visão Geral
 
 <p align="center">
-  <img src="URL_DO_SEU_GIF_OU_IMAGEM_AQUI" alt="Demonstração do Gerenciador de Hotel" width="700"/>
+  <img src="demonstracao.gif" alt="Demonstração do Gerenciador de Hotel" width="700"/>
 </p>
 
 ---
