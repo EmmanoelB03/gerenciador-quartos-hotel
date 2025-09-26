@@ -3,7 +3,6 @@
 class Node:
     def __init__(self,room,guest):
         self.room = room
-        self.status = status
         self.guest = guest
         self.next = None
 
@@ -35,7 +34,7 @@ class StackInfoGuest():
     def peek(self):
 
         if self.size > 0:
-            print(f'Quarto: {self.top.room} | Status: {self.top.status} | Hosp: {self.top.guest}')
+            print(f'Quarto: {self.top.room} | Hosp: {self.top.guest}')
 
         else:
             print('Pilha vazia')
