@@ -85,6 +85,7 @@ with st.container(border=True):
         if st.button("Realizar Check-Out"):
             # Lógica de negócio (não foi alterada)
             s_disponiveis.append(quarto_selecionado_checkout)
+            s_disponiveis.ordenar()
             s_ocupados.remove(quarto_selecionado_checkout)
             
             st.success(f"Check-out do quarto {quarto_selecionado_checkout} realizado com sucesso!")
