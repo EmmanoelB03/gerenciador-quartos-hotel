@@ -3,8 +3,15 @@ class Node:
         self.data = data
         self.next = None
 
+
 class LinkedList:
     def __init__(self, initial_data=None):
+        """
+        Inicializa uma lista encadeada.
+        
+        Args:
+            initial_data: Lista opcional de elementos para inicializar a lista encadeada.
+        """
         self.head = None
         self.size = 0
         if initial_data:
@@ -12,23 +19,41 @@ class LinkedList:
                 self.append(item)
 
     def __iter__(self):
+        """
+        Permite iterar sobre os elementos da lista encadeada.
+        
+        Yields:
+            Os dados de cada nó da lista.
+        """
         current = self.head
         while current:
             yield current.data
             current = current.next
 
     def append(self, data):
+        """
+        Adiciona um novo elemento ao final da lista.
+        
+        Args:
+            data: Dado a ser adicionado na lista.
+        """
         newNode = Node(data)
         if self.head is None:
             self.head = newNode
         else:
             current = self.head
-            while current.next:
+            while current.next is not None:
                 current = current.next
             current.next = newNode
         self.size += 1
 
     def remove(self, data):
+        """
+        Remove a primeira ocorrência de um elemento da lista.
+        
+        Args:
+            data: Dado a ser removido da lista.
+        """
         if self.size == 0:
             print('Lista vazia')
             return
@@ -47,6 +72,12 @@ class LinkedList:
             print('Item não encontrado')
 
     def pop(self):
+        """
+        Remove e retorna o último elemento da lista.
+        
+        Returns:
+            O dado do último nó removido ou None se a lista estiver vazia.
+        """
         if self.size <= 0:
             print('Lista vazia')
             return
@@ -64,19 +95,37 @@ class LinkedList:
             current.next = None
             self.size -= 1
             return data
-    
+
     def peek(self):
+        """
+        Retorna o último elemento da lista sem removê-lo.
+        
+        Returns:
+            O dado do último nó ou None se a lista estiver vazia.
+        """
         if self.is_empty():
             return None
         current = self.head
         while current.next:
             current = current.next
         return current.data
-    
+
     def is_empty(self):
-        return self.size == 0
+        """
+        Verifica se a lista está vazia.
         
+        Returns:
+            True se a lista estiver vazia, False caso contrário.
+        """
+        return self.size == 0
+
     def view(self):
+        """
+        Retorna uma representação em string da lista encadeada.
+        
+        Returns:
+            String representando todos os elementos da lista.
+        """
         r = ''
         current = self.head
         while current:
@@ -85,9 +134,12 @@ class LinkedList:
         return r + 'None'
 
     def ordenar(self):
+        """
+        Ordena os elementos da lista em ordem crescente usando bubble sort.
+        """
         if self.size < 2:
             return
-
+        
         trocou_algo = True
         while trocou_algo:
             trocou_algo = False
@@ -97,5 +149,3 @@ class LinkedList:
                     current.data, current.next.data = current.next.data, current.data
                     trocou_algo = True
                 current = current.next
-
-
