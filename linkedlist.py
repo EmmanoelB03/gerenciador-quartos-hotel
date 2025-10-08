@@ -149,3 +149,85 @@ class LinkedList:
                     current.data, current.next.data = current.next.data, current.data
                     trocou_algo = True
                 current = current.next
+
+    def merge_sort(self):
+        """
+        Ordena a lista encadeada usando o algoritmo Merge Sort.
+        Complexidade: O(n log n)
+        """
+        if self.size < 2:
+            return
+        self.head = self._merge_sort_recursive(self.head)
+
+    def _merge_sort_recursive(self, head):
+        """
+        Função auxiliar recursiva para o Merge Sort.
+        
+        Args:
+            head: Nó inicial da sublista a ser ordenada.
+            
+        Returns:
+            Cabeça da lista ordenada.
+        """
+        if head is None or head.next is None:
+            return head
+        
+        # Dividir a lista ao meio
+        meio = self._get_middle(head)
+        meio_next = meio.next
+        meio.next = None
+        
+        # Ordenar recursivamente as duas metades
+        left = self._merge_sort_recursive(head)
+        right = self._merge_sort_recursive(meio_next)
+        
+        # Mesclar as duas metades ordenadas
+        return self._merge(left, right)
+
+    def _get_middle(self, head):
+        """
+        Encontra o nó do meio da lista usando técnica slow/fast pointer.
+        
+        Args:
+            head: Nó inicial da lista.
+            
+        Returns:
+            Nó do meio da lista.
+        """
+        if head is None:
+            return head
+        
+        slow = head
+        fast = head
+        
+        while fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        return slow
+
+    def _merge(self, left, right):
+        """
+        Mescla duas listas ordenadas em uma única lista ordenada.
+        
+        Args:
+            left: Cabeça da primeira lista ordenada.
+            right: Cabeça da segunda lista ordenada.
+            
+        Returns:
+            Cabeça da lista mesclada e ordenada.
+        """
+        if left is None:
+            return right
+        if right is None:
+            return left
+        
+        # Escolher o menor elemento como cabeça
+        if left.data <= right.data:
+            result = left
+            result.next = self._merge(left.next, right)
+        else:
+            result = right
+            result.next = self._merge(left, right.next)
+        
+        return result
