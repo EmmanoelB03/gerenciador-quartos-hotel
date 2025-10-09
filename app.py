@@ -133,6 +133,46 @@ class LinkedList:
             current = current.next
         return r + 'None'
 
+    # ----------------------------------------------
+    # Novos métodos para Ordenação (Merge Sort: O(n log n))
+    # ----------------------------------------------
+
+    def ordenar(self):
+        """
+        Ordena os elementos da lista em ordem crescente usando Merge Sort.
+        """
+        # A cabeça da lista é atualizada com a lista ordenada retornada
+        self.head = self._merge_sort(self.head)
+
+
+    def _merge_sort(self, head):
+        """
+        Implementação recursiva do Merge Sort.
+        
+        Args:
+            head: O nó inicial da sublista a ser ordenada.
+            
+        Returns:
+            O nó inicial da sublista ordenada.
+        """
+        # Caso base: A sublista está vazia ou tem um único elemento (já ordenada)
+        if head is None or head.next is None:
+            return head
+
+        # 1. Dividir a lista em duas metades
+        middle = self._get_middle(head) # Retorna o último nó da primeira metade
+        next_to_middle = middle.next    # Cabeça da segunda metade
+        middle.next = None              # Corta a lista para separar as duas metades
+
+        # 2. Chamar _merge_sort recursivamente em cada metade
+        left = self._merge_sort(head)
+        right = self._merge_sort(next_to_middle)
+
+        # 3. Mesclar as duas metades ordenadas
+        sorted_list = self._merge(left, right)
+        return sorted_list
+
+
     def _get_middle(self, head):
         """
         Encontra o nó do meio da lista usando técnica slow/fast pointer.
@@ -141,14 +181,14 @@ class LinkedList:
             head: Nó inicial da lista.
             
         Returns:
-            Nó do meio da lista.
+            Nó do meio da lista (na verdade, o último nó da primeira metade).
         """
         if head is None:
             return head
         
         slow = head
         fast = head
-        
+    
         while fast.next and fast.next.next:
             slow = slow.next
             fast = fast.next.next
@@ -171,7 +211,6 @@ class LinkedList:
         if right is None:
             return left
         
-        # Escolher o menor elemento como cabeça
         if left.data <= right.data:
             result = left
             result.next = self._merge(left.next, right)
