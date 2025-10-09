@@ -133,23 +133,6 @@ class LinkedList:
             current = current.next
         return r + 'None'
 
-    def ordenar(self):
-        """
-        Ordena os elementos da lista em ordem crescente usando bubble sort.
-        """
-        if self.size < 2:
-            return
-        
-        trocou_algo = True
-        while trocou_algo:
-            trocou_algo = False
-            current = self.head
-            while current.next:
-                if current.data > current.next.data:
-                    current.data, current.next.data = current.next.data, current.data
-                    trocou_algo = True
-                current = current.next
-
     def _get_middle(self, head):
         """
         Encontra o nó do meio da lista usando técnica slow/fast pointer.
